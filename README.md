@@ -5,7 +5,7 @@
 # Schemas -->
 
 ### -- SQL Schema --
-  - SQL/MySql -
+  - SQL/Postgres -
 
 ![SQL Schema](./images/SQLSchema.png)
 

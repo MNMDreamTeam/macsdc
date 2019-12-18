@@ -7,6 +7,7 @@
       qBody: String,
       qDate: Date,
       authorName: String,
+      authorEmail: String,
       helpfulCount: Integer,
       reported: Integer,
       answers: [{
@@ -14,6 +15,7 @@
         aBody: String,
         aDate: Date,
         aAuthor: String,
+        aAuthorEmail: String,
         aHelpfulCount: Integer,
         aPhotos: [{
           url: String
