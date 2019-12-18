@@ -3,4 +3,4 @@
 # Getting Started
 
 # Schema
-![SQL Schema](../SQLSchema.png)
+![SQL Schema](./images/SQLSchema.png)
