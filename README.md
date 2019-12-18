@@ -12,4 +12,4 @@
 ### -- NoSQL Schema --
   - MongoDB/Mongoose -
 
-![Mongo Schema](./mongoSchema.png)
+![Mongo Schema](./images/mongoSchema.png)
