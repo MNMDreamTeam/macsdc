@@ -1,8 +1,8 @@
 # Dream Team Clothing Supply - SDC
 
-# Getting Started
+# Getting Started -->
 
-# Schemas
+# Schemas -->
 
 ### -- SQL Schema --
   - SQL/MySql -
@@ -11,3 +11,5 @@
 
 ### -- NoSQL Schema --
   - MongoDB/Mongoose -
+
+![Mongo Schema](./mongoSchema.png)
