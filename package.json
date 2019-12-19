@@ -19,7 +19,6 @@
   "homepage": "https://github.com/MNMDreamTeam/macsdc#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "fast-csv": "^3.6.0",
     "pg": "^7.15.1"
   }
 }
