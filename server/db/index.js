@@ -1,21 +1,22 @@
 const { Pool } = require('pg');
+const { user, host, db, port, qt } = require('../../config.js');
 
 const pool = new Pool({
-  user: 'mcolligan',
-  host: 'localhost',
-  database: 'postgres',
-  port: 5432
+  user: user,
+  host: host,
+  database: db,
+  port: port
 })
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-}
+// module.exports = {
+//   query: (text, params) => pool.query(text, params),
+// }
 
 // promise connect
 pool.connect()
 .then(client => {
   return client
-  .query('SELECT * FROM qa.questions WHERE id = $1', [33333])
+  .query(`SELECT * FROM ${qt} WHERE id = $1`, [1])
   .then(res => {
     client.release();
     console.log(res.rows[0]);
