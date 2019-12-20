@@ -4,7 +4,7 @@ CREATE SCHEMA qa;
 
 SET search_path TO qa;
 
-CREATE TABLE questions (
+CREATE TABLE IF NOT EXISTS questions (
  id serial PRIMARY KEY,
  product_id int NOT NULL,
  body varchar(500),
@@ -14,7 +14,7 @@ CREATE TABLE questions (
  reported char,
  helpful int);
 
-CREATE TABLE answers (
+CREATE TABLE IF NOT EXISTS answers (
  id serial PRIMARY KEY,
  question_id int REFERENCES questions(id),
  body VARCHAR(1500),
@@ -24,7 +24,7 @@ CREATE TABLE answers (
  reported CHAR,
  helpful int);
 
-CREATE TABLE answers_photos (
+CREATE TABLE IF NOT EXISTS answers_photos (
 id serial PRIMARY KEY,
 answer_id int REFERENCES answers(id),
 url VARCHAR(400));
