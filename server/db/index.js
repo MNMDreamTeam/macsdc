@@ -7,13 +7,9 @@ const pool = new Pool({
   port: 5432
 })
 
-pool.query('', (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Successsssssssssssss');
-  }
-})
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+}
 
 // promise connect
 pool.connect()
