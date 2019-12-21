@@ -2,9 +2,10 @@
   "name": "macsdc",
   "version": "1.0.0",
   "description": "Dream Team Clothing Back-end",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,12 @@
   },
   "homepage": "https://github.com/MNMDreamTeam/macsdc#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "pg": "^7.15.1"
+    "faker": "^4.1.0",
+    "nodemon": "^2.0.2",
+    "pg": "^7.15.1",
+    "pg-native": "^3.0.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"

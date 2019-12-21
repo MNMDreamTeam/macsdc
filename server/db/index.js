@@ -1,29 +1,37 @@
 const { Pool } = require('pg');
-const { user, host, db, port, qt } = require('../../config.js');
 
 const pool = new Pool({
-  user: user,
-  host: host,
-  database: db,
-  port: port
-})
+  user: 'mcolligan',
+  host: 'localhost',
+  database: 'postgres',
+  port: 5432
+});
+
+const query = (queryString, params) => {
+  pool.query('SELECT * FROM qa.questions WHERE product_id = $1', [2])
+  .then(res => {
+    console.log(res.rows);
+  })
+}
 
 // module.exports = {
 //   query: (text, params) => pool.query(text, params),
 // }
 
 // promise connect
-pool.connect()
-.then(client => {
-  return client
-  .query(`SELECT * FROM ${qt} WHERE id = $1`, [1])
-  .then(res => {
-    client.release();
-    console.log(res.rows[0]);
-  })
-  .catch(err => {
-    client.release();
-    console.log(err);
-  })
-})
+// Test
+// pool.connect()
+// .then(client => {
+//   return client
+//   .query(`SELECT * FROM qa.questions WHERE product_id = $1`, [1])
+//   .then(res => {
+//     client.release();
+//     console.log(res.rows);
+//   })
+//   .catch(err => {
+//     client.release();
+//     console.log(err);
+//   })
+// })
 
+module.exports = { query };
