@@ -2,7 +2,11 @@ const questionsRoutes = require('express').Router();
 const questionsControl = require('../controllers/questionsControl')
 
 questionsRoutes.get('/:id/', (req, res) => {
-  questionsControl.getQuestions(req.params.id)
+  let count = 5;
+  if (req.query.hasOwnProperty('count')) {
+    count = req.query.count;
+  }
+  questionsControl.getQuestions(req.params.id, count)
   .then(data => {
     res.send(data);
   })
