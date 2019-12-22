@@ -13,33 +13,9 @@ const query = (queryString, params) => {
     .then(res => {
       return res.rows;
     })
+    .catch((err) => {
+      console.log(err);
+    })
 }
-
-// module.exports = {
-//   query: (text, params) => pool.query(text, params),
-// }
-
-// promise connect
-// Test
-// pool.connect()
-// .then(client => {
-//   return client
-//   .query(`SELECT * FROM qa.questions WHERE product_id = $1`, [1])
-//   .then(res => {
-//     client.release();
-//     console.log(res.rows);
-//   })
-//   .catch(err => {
-//     client.release();
-//     console.log(err);
-//   })
-// })
-
-// {
-//   user: 'mcolligan',
-//   host: 'localhost',
-//   database: 'postgres',
-//   port: 5432
-// }
 
 module.exports = { query };
