@@ -23,15 +23,15 @@ const getPhotos = (aId) => {
   })
 }
 
-const queryQuestions = (product_id, count) => {
+const queryQuestions = (product_id, page, count) => {
   let output = {
     product_id: product_id,
   }
 
 
   return new Promise((resolve, reject) => {
-    let q = `SELECT * FROM ${qt} WHERE product_id = $1 AND reported = $2 ORDER BY question_id LIMIT $3`;
-    let p = [product_id, 0, count];
+    let q = `SELECT * FROM ${qt} WHERE product_id = $1 AND reported = $2 ORDER BY question_helpfulness DESC OFFSET $3 LIMIT $4`;
+    let p = [product_id, 0, (page * count), count];
 
     qdb.query(q, p).then((questions) => {
       let answersArr = [];
@@ -65,6 +65,9 @@ const queryQuestions = (product_id, count) => {
           resolve(output);
         })
       });
+    })
+    .catch((err) => {
+      reject('Could not query --', err);
     })
   })
 }
