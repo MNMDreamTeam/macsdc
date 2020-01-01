@@ -18,6 +18,16 @@
 
 # Getting Started -->
 
+  *- Install dependancies:
+  ```
+  $ nmp install
+  ```
+
+  *- Start Server:
+  ```
+  $ npm start
+  ```
+
 # Schemas -->
 
 ### -- SQL Schema --
