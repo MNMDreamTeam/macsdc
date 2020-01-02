@@ -1,7 +1,7 @@
 const questionsModel = require('../models/questionsModel');
 
-const getQuestions = (id, page, count) => {
- return questionsModel.queryQuestions(id, page, count);
+const getQuestions = (question_id, page, count) => {
+ return questionsModel.queryQuestions(question_id, page, count);
 }
 
 module.exports = { getQuestions };

@@ -3,8 +3,8 @@ const { qt, at, apt } = require('../../config.js');
 
 const getAnswers = (qId) => {
   return new Promise((resolve, reject) => {
-    let q = `SELECT * FROM ${at} WHERE question_id = $1`;
-    let p = [qId];
+    let q = `SELECT * FROM ${at} WHERE question_id = $1 AND reported = $2`;
+    let p = [qId, 0];
 
     qdb.query(q, p).then((res) => {
       resolve(res);
@@ -72,4 +72,4 @@ const queryQuestions = (product_id, page, count) => {
   })
 }
 
-module.exports = { queryQuestions };
+module.exports = { queryQuestions, getPhotos };
