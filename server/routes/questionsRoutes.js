@@ -14,12 +14,8 @@ questionsRoutes.get('/:id/', (req, res) => {
   }
 
   questionsControl.getQuestions(req.params.id, page, count)
-    .then(data => {
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    .then(data => (res.send(data)))
+    .catch(err => (console.log(err)))
 });
 
 questionsRoutes.post('/:id/', (req, res) => {

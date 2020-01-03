@@ -8,4 +8,12 @@ const addAnswer = (id, a, n, e, p) => {
   return answerModel.insertA(id, a, n, e, p);
 }
 
-module.exports = { getAnswers, addAnswer };
+const addHelpful = (aId) => {
+  return answerModel.helpful(aId);
+}
+
+const report = (aId) => {
+  return answerModel.reported(aId);
+}
+
+module.exports = { getAnswers, addAnswer, addHelpful, report };
