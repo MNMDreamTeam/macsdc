@@ -34,6 +34,9 @@ const queryAnswers = (question_id, page, count) => {
         })
         resolve(output);
       })
+    })
+    .catch((err) => {
+      reject('Could not query answers ---', err);
     });
   });
 }

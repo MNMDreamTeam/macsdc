@@ -22,4 +22,34 @@ questionsRoutes.get('/:id/', (req, res) => {
     })
 });
 
+questionsRoutes.post('/:id/', (req, res) => {
+  questionsControl.addQuestion(req.params.id, req.query.body, req.query.name, req.query.email)
+  .then(() => {
+    res.status(201).end();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+});
+
+questionsRoutes.put('/:id/helpful', (req, res) => {
+  questionsControl.addHelpful(req.params.id)
+  .then(() => {
+    res.status(204).end()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+})
+
+questionsRoutes.put('/:id/report', (req, res) => {
+  questionsControl.report(req.params.id)
+  .then(() => {
+    res.status(204).end()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+})
+
 module.exports = questionsRoutes;
