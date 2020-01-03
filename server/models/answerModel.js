@@ -26,7 +26,7 @@ const queryAnswers = (question_id, page, count) => {
             photo.forEach((el, j) => {
               output.results.forEach((q, k) => {
                 if (q.id === el.answer_id) {
-                  q.photos.push({id: el.id, url: el.url});
+                  q.photos.push({ id: el.id, url: el.url });
                 }
               })
             })
@@ -35,9 +35,9 @@ const queryAnswers = (question_id, page, count) => {
         resolve(output);
       })
     })
-    .catch((err) => {
-      reject('Could not query answers ---', err);
-    });
+      .catch((err) => {
+        reject('Could not query answers ---', err);
+      });
   });
 };
 
@@ -61,9 +61,14 @@ const insertA = (qId, a, n, e, ph) => {
 
     qdb.query(q, p).then((aId) => {
       if (ph) {
-        // same as before....must be a better way
+        let photoArr;
+        if (typeof ph === 'string') {
+          photoArr = ph.split(',');
+        } else {
+          photoArr = ph;
+        }
         let photos = [];
-        ph.split(',').forEach(el => { // For testing only....remove .split once front-end implemented
+        photoArr.forEach(el => {
           photos.push(insertP(aId[0].id, el));
         });
         Promise.all(photos).then(() => {
@@ -72,9 +77,9 @@ const insertA = (qId, a, n, e, ph) => {
         resolve('Success');
       }
     })
-    .catch((err) => {
-      reject('Counld not insert photos', err);
-    })
+      .catch((err) => {
+        reject('Counld not insert photos', err);
+      })
   });
 };
 
