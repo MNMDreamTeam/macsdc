@@ -22,4 +22,8 @@ answerRoutes.get('/:id/answers/', (req, res) => {
   })
 });
 
+answerRoutes.post('/:id/answers', (req, res) => {
+  answerControl.addAnswer(req.params.id, req.body.body, req.body.name, req.body.email, req.body.photos)
+});
+
 module.exports = answerRoutes;

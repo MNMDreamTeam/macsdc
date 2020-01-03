@@ -39,6 +39,12 @@ const queryAnswers = (question_id, page, count) => {
       reject('Could not query answers ---', err);
     });
   });
-}
+};
 
-module.exports = { queryAnswers };
+const insertA = (id, a, n, e, p) => {
+  return new Promise((resolve, reject) => {
+
+  });
+};
+
+module.exports = { queryAnswers, insertA };

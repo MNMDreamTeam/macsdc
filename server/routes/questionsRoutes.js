@@ -23,7 +23,7 @@ questionsRoutes.get('/:id/', (req, res) => {
 });
 
 questionsRoutes.post('/:id/', (req, res) => {
-  questionsControl.addQuestion(req.params.id, req.query.body, req.query.name, req.query.email)
+  questionsControl.addQuestion(req.params.id, req.body.body, req.body.name, req.body.email)
   .then(() => {
     res.status(201).end();
   })
