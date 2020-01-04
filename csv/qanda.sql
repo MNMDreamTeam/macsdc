@@ -4,25 +4,27 @@ CREATE SCHEMA qa;
 
 SET search_path TO qa;
 
+\c questionsapi;
+
 CREATE TABLE IF NOT EXISTS questions (
- id serial PRIMARY KEY,
+ question_id serial PRIMARY KEY,
  product_id int NOT NULL,
- body varchar(500),
- date_written date,
+ question_body varchar(500),
+ question_date date,
  asker_name varchar(200),
  asker_email varchar(200),
  reported char,
- helpful int);
+ question_helpfulness int);
 
 CREATE TABLE IF NOT EXISTS answers (
- id serial PRIMARY KEY,
+ answer_id serial PRIMARY KEY,
  question_id int REFERENCES questions(id),
  body VARCHAR(1500),
- date_written DATE,
+ date DATE,
  answerer_name VARCHAR(300),
  answerer_email VARCHAR(180),
  reported CHAR,
- helpful int);
+ helpfulness int);
 
 CREATE TABLE IF NOT EXISTS answers_photos (
 id serial PRIMARY KEY,
@@ -30,10 +32,10 @@ answer_id int REFERENCES answers(id),
 url VARCHAR(400));
 
 
-COPY qa.questions(id, product_id, body, date_written, asker_name, asker_email,reported, helpful)
+COPY qa.questions(question_id, product_id, question_body, question_date, asker_name, asker_email,reported, question_helpfulness)
 FROM '/Users/mcolligan/FEC/projectGreenfieldII/csvData/questions.csv' DELIMITER ',' CSV HEADER;
 
-COPY qa.answers(id, question_id, body, date_written, answerer_name, answerer_email, reported, helpful)
+COPY qa.answers(answer_id, question_id, body, date, answerer_name, answerer_email, reported, helpfulness)
 FROM '/Users/mcolligan/FEC/projectGreenfieldII/csvData/answers.csv' DELIMITER ',' CSV HEADER;
 
 COPY qa.answers_photos(id, answer_id, url)
