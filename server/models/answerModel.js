@@ -10,7 +10,7 @@ const queryAnswers = (question_id, page, count) => {
   }
 
   return new Promise((resolve, reject) => {
-    let q = `SELECT * FROM ${at} WHERE question_id = $1 AND reported = $2 ORDER BY helpful DESC`; // OFFSET $3 LIMIT $4
+    let q = `SELECT * FROM ${at} WHERE question_id = $1 AND reported = $2 ORDER BY helpfulness DESC`; // OFFSET $3 LIMIT $4
     let p = [question_id, 0]; // , 5, count
 
     qdb.query(q, p).then((answers) => {
@@ -25,7 +25,7 @@ const queryAnswers = (question_id, page, count) => {
           if (photo.length > 0) {
             photo.forEach((el, j) => {
               output.results.forEach((q, k) => {
-                if (q.id === el.answer_id) {
+                if (q.answer_id === el.answer_id) {
                   q.photos.push({ id: el.id, url: el.url });
                 }
               })
@@ -55,8 +55,8 @@ const insertP = (id, url) => {
 
 const insertA = (qId, a, n, e, ph) => {
   return new Promise((resolve, reject) => {
-    let q = `INSERT INTO ${at} (question_id, body, date_written, answerer_name, answerer_email, helpful)
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+    let q = `INSERT INTO ${at} (question_id, body, date, answerer_name, answerer_email, helpfulness)
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING answer_id;`;
     let p = [qId, a, new Date(), n, e, 0];
 
     qdb.query(q, p).then((aId) => {
@@ -69,7 +69,7 @@ const insertA = (qId, a, n, e, ph) => {
         }
         let photos = [];
         photoArr.forEach(el => {
-          photos.push(insertP(aId[0].id, el));
+          photos.push(insertP(aId[0].answer_id, el));
         });
         Promise.all(photos).then(() => {
           console.log('Photo(s) Inserted');
@@ -85,7 +85,7 @@ const insertA = (qId, a, n, e, ph) => {
 
 const helpful = (aId) => {
   return new Promise((resolve, reject) => {
-    let q = `UPDATE ${at} SET helpful = helpful + $1 WHERE id = $2;`;
+    let q = `UPDATE ${at} SET helpfulness = helpfulness + $1 WHERE answer_id = $2;`;
     let p = [1, aId];
 
     qdb.query(q, p).then(() => {
@@ -99,7 +99,7 @@ const helpful = (aId) => {
 
 const reported = (aId) => {
   return new Promise((resolve, reject) => {
-    let q = `UPDATE ${at} SET reported = 1 WHERE id = $1;`;
+    let q = `UPDATE ${at} SET reported = 1 WHERE answer_id = $1;`;
     let p = [aId];
 
     qdb.query(q, p).then(() => {

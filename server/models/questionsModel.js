@@ -43,9 +43,9 @@ const queryQuestions = (product_id, page, count) => {
         let photos = [];
         answers.forEach((ans, j) => { // fix this nested loop, no need for it
           ans.forEach((obj) => {
-            output.results[j].answers[obj.id] = obj;
-            output.results[j].answers[obj.id].photos = [];
-            photos.push(getPhotos(obj.id));
+            output.results[j].answers[obj.answer_id] = obj;
+            output.results[j].answers[obj.answer_id].photos = [];
+            photos.push(getPhotos(obj.answer_id));
           })
         });
         Promise.all(photos).then((ansPhotos) => {

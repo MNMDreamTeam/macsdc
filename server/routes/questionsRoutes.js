@@ -41,7 +41,7 @@ questionsRoutes.put('/:id/helpful', (req, res) => {
 questionsRoutes.put('/:id/report', (req, res) => {
   questionsControl.report(req.params.id)
   .then(() => {
-    res.status(204).end()
+    res.status(204).end();
   })
   .catch((err) => {
     console.log(err);
