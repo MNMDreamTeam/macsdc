@@ -18,7 +18,7 @@ const queryAnswers = (question_id, page, count) => {
       output.results = answers;
       output.results.forEach((el) => {
         el.photos = [];
-        photos.push(questionsModel.getPhotos(el.id));
+        photos.push(questionsModel.getPhotos(el.answer_id));
       });
       Promise.all(photos).then((ansPhotos) => {
         ansPhotos.forEach((photo, i) => {
