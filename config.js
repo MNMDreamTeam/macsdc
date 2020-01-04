@@ -9,5 +9,6 @@ module.exports = {
   port: process.env.PORT,
   qt: process.env.QT,
   at: process.env.AT,
-  apt: process.env.APT
+  apt: process.env.APT,
+  newRelic: process.env.NR
 };
