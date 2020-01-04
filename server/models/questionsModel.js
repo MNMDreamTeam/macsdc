@@ -29,7 +29,7 @@ const queryQuestions = (product_id, page, count) => {
   }
 
   return new Promise((resolve, reject) => {
-    let q = `SELECT * FROM ${qt} WHERE product_id = $1 AND reported = $2 ORDER BY question_helpfulness DESC OFFSET $3 LIMIT $4`;
+    let q = `SELECT * FROM ${qt} WHERE product_id = $1 AND reported = $2 ORDER BY question_helpfulness DESC OFFSET $3 LIMIT $4;`;
     let p = [product_id, 0, (page * count), count];
 
     qdb.query(q, p).then((questions) => {
