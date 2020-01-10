@@ -1,10 +1,10 @@
 CREATE DATABASE questionsapi;
 
+\c questionsapi;
+
 CREATE SCHEMA qa;
 
 SET search_path TO qa;
-
-\c questionsapi;
 
 CREATE TABLE IF NOT EXISTS questions (
  question_id serial PRIMARY KEY,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS questions (
 
 CREATE TABLE IF NOT EXISTS answers (
  answer_id serial PRIMARY KEY,
- question_id int REFERENCES questions(id),
+ question_id int REFERENCES questions(question_id),
  body VARCHAR(1500),
  date DATE,
  answerer_name VARCHAR(300),
@@ -28,9 +28,8 @@ CREATE TABLE IF NOT EXISTS answers (
 
 CREATE TABLE IF NOT EXISTS answers_photos (
 id serial PRIMARY KEY,
-answer_id int REFERENCES answers(id),
+answer_id int REFERENCES answers(answer_id),
 url VARCHAR(400));
-
 
 COPY qa.questions(question_id, product_id, question_body, question_date, asker_name, asker_email,reported, question_helpfulness)
 FROM '/Users/mcolligan/FEC/projectGreenfieldII/csvData/questions.csv' DELIMITER ',' CSV HEADER;
@@ -40,3 +39,20 @@ FROM '/Users/mcolligan/FEC/projectGreenfieldII/csvData/answers.csv' DELIMITER ',
 
 COPY qa.answers_photos(id, answer_id, url)
 FROM '/Users/mcolligan/FEC/projectGreenfieldII/csvData/answers_photos.csv' DELIMITER ',' CSV HEADER;
+
+CREATE INDEX p_id ON qa.answers (product_id);
+CREATE INDEX q_id ON qa.questions (question_id);
+
+CREATE INDEX a_id ON qa.answers (answer_id);
+CREATE INDEX aq_id ON qa.answers (question_id);
+
+CREATE INDEX ap_id ON qa.answers_photos (id);
+CREATE INDEX apa_id ON qa.answers_photos (answer_id);
+
+SELECT setval('questions_questions_id_seq', (SELECT MAX(question_id) FROM qa.questions)+1);
+
+SELECT setval('answers_answers_id_seq', (SELECT MAX(answer_id) FROM qa.answers)+1);
+
+SELECT setval('answers_photos_id_seq', (SELECT MAX(id) FROM qa.answers_photos)+1);
+
+
